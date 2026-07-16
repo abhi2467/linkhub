@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>All links - LinkHub</title>
+    <link rel="shortcut icon" href="images/favicon.ico" />
+    <link href="css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css" />
+    <link href="css/style.css" rel="stylesheet" />
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="index.html"><i class="bi bi-link-45deg me-2"></i>LinkHub</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMain">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarMain">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="index.html"><i class="bi bi-house-door me-1"></i>Home</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="link.html"><i class="bi bi-grid-3x3-gap-fill me-1"></i>All links</a></li>
+                    <li class="nav-item"><a class="nav-link" href="about.html"><i class="bi bi-info-circle me-1"></i>About</a></li>
+                </ul>
+                <button id="themeToggle" class="btn btn-outline-light btn-sm ms-2" title="Toggle dark/light mode">
+                    <i class="bi bi-moon-fill"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container my-4">
+        <div class="d-flex flex-wrap align-items-center justify-content-between mb-4">
+            <h2 class="fw-semibold"><i class="bi bi-collection me-2 text-primary"></i>All links</h2>
+            <div class="d-flex gap-2 mt-2 mt-sm-0 flex-wrap">
+                <div class="input-group" style="max-width: 240px;">
+                    <span class="input-group-text bg-white"><i class="bi bi-search"></i></span>
+                    <input type="text" id="searchLinks" class="form-control" placeholder="Search…" />
+                </div>
+                <select id="categoryFilter" class="form-select" style="width: auto;">
+                    <option value="all">All categories</option>
+                    <!-- options filled by JS -->
+                </select>
+                <button class="btn btn-outline-warning" id="favFilterBtn" title="Show only important">
+                    <i class="bi bi-star-fill"></i>
+                </button>
+                <button class="btn btn-outline-secondary" id="randomLinkBtn" title="Surprise me!">
+                    <i class="bi bi-shuffle"></i>
+                </button>
+            </div>
+        </div>
+
+        <div class="row g-4" id="allLinksContainer">
+            <div class="col-12 text-center py-5 text-muted">loading links …</div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <h5><i class="bi bi-link-45deg me-2"></i>LinkHub</h5>
+                    <p class="mb-0 small">Curated links — simple & transparent.</p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    
+                    <p class="mb-0 small">Made By <code>Abhinav Chauhan</code></p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="js/script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            fetchLinks().then(() => {
+                // Populate category filter dynamically
+                const filterSelect = document.getElementById('categoryFilter');
+                const categories = [...new Set(links.map(l => l.category).filter(Boolean))];
+                categories.forEach(cat => {
+                    const opt = document.createElement('option');
+                    opt.value = cat;
+                    opt.textContent = cat.charAt(0).toUpperCase() + cat.slice(1);
+                    filterSelect.appendChild(opt);
+                });
+
+                renderAllLinks();
+                document.getElementById('searchLinks').addEventListener('input', filterAllLinks);
+                document.getElementById('categoryFilter').addEventListener('change', filterAllLinks);
+                document.getElementById('favFilterBtn').addEventListener('click', function() {
+                    this.classList.toggle('active');
+                    filterAllLinks();
+                });
+                document.getElementById('randomLinkBtn').addEventListener('click', function() {
+                    if (filteredLinks.length) {
+                        const random = filteredLinks[Math.floor(Math.random() * filteredLinks.length)];
+                        window.open(random.url, '_blank');
+                    } else if (links.length) {
+                        const random = links[Math.floor(Math.random() * links.length)];
+                        window.open(random.url, '_blank');
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

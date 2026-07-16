@@ -1,0 +1,238 @@
+/* ===== css/style.css ===== */
+:root {
+    --primary: #4361ee;
+    --secondary: #3a0ca3;
+    --accent: #4cc9f0;
+    --light: #f8f9fa;
+    --dark: #212529;
+    --success: #4bb543;
+    --danger: #e63946;
+
+    /* Light theme (default) */
+    --bg-body: #f5f7ff;
+    --text-color: #212529;
+    --card-bg: #ffffff;
+    --border-color: #dee2e6;
+    --shadow: rgba(0,0,0,0.04);
+    --muted: #6c757d;
+    --input-bg: #ffffff;
+}
+
+body.dark-theme {
+    --bg-body: #12121e;
+    --text-color: #e8e8f0;
+    --card-bg: #1e1e32;
+    --border-color: #2c2c4a;
+    --shadow: rgba(0,0,0,0.3);
+    --light: #1e1e32;
+    --muted: #aab;
+    --input-bg: #2a2a44;
+}
+
+body {
+    background-color: var(--bg-body);
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    color: var(--text-color);
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+main { flex: 1 0 auto; }
+
+/* Navbar */
+.navbar {
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+.navbar-brand { font-size: 1.5rem; letter-spacing: -0.5px; }
+
+/* Hero */
+.hero-section {
+    background: linear-gradient(135deg, rgba(67,97,238,0.95), rgba(58,12,163,0.95)), url('https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1350&q=80') center/cover;
+    color: white;
+    border-radius: 0 0 2rem 2rem;
+    margin-bottom: 2rem;
+}
+.text-gradient { font-weight: 700; background: linear-gradient(135deg, #fff, #caf0f8); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+
+/* Stats cards */
+.stats-card {
+    background: var(--card-bg);
+    border-radius: 1.2rem;
+    padding: 1.2rem;
+    box-shadow: 0 8px 20px var(--shadow);
+    text-align: center;
+    transition: 0.2s;
+    border: 1px solid var(--border-color);
+    color: var(--text-color);
+}
+.stats-card:hover { transform: translateY(-3px); box-shadow: 0 12px 24px rgba(67,97,238,0.15); }
+.clickable { cursor: pointer; }
+.clickable:hover { background: rgba(67,97,238,0.08); }
+
+/* Link cards */
+.link-card {
+    border: none;
+    border-radius: 1.2rem;
+    box-shadow: 0 6px 14px var(--shadow);
+    transition: 0.2s;
+    height: 100%;
+    background: var(--card-bg);
+    overflow: hidden;
+    color: var(--text-color);
+}
+.link-card:hover { transform: translateY(-5px); box-shadow: 0 16px 28px rgba(67,97,238,0.18); }
+.card-header {
+    background-color: rgba(67,97,238,0.06);
+    border-bottom: 1px solid var(--border-color);
+    font-weight: 600;
+    padding: 0.9rem 1.2rem;
+}
+.card-footer {
+    background: transparent;
+    border-top: 1px solid var(--border-color);
+}
+
+/* Category badges */
+.category-badge {
+    font-size: 0.7rem;
+    padding: 0.25rem 0.9rem;
+    border-radius: 30px;
+    font-weight: 500;
+    text-transform: capitalize;
+}
+.category-work { background: rgba(67,97,238,0.15); color: #5a7aff; }
+.category-personal { background: rgba(75,181,67,0.15); color: #5fcf5f; }
+.category-learning { background: rgba(255,193,7,0.15); color: #ffd43b; }
+.category-entertainment { background: rgba(230,57,70,0.15); color: #ff6b7a; }
+.category-social { background: rgba(155,89,182,0.15); color: #b07cd6; }
+.category-other { background: rgba(108,117,125,0.15); color: #aab; }
+
+.link-url {
+    color: var(--primary);
+    text-decoration: none;
+    font-size: 0.9rem;
+    word-break: break-word;
+}
+.link-url:hover { text-decoration: underline; color: var(--secondary); }
+
+/* Category chips */
+.category-chip {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 30px;
+    padding: 0.4rem 1rem;
+    font-size: 0.9rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    transition: 0.2s;
+    color: var(--text-color);
+}
+.category-chip:hover {
+    background: var(--primary);
+    color: white;
+    border-color: var(--primary);
+}
+.category-chip .badge {
+    font-size: 0.7rem;
+}
+
+/* Recent chips */
+.recent-chip {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 30px;
+    padding: 0.3rem 1rem;
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: 0.2s;
+    color: var(--text-color);
+}
+.recent-chip:hover {
+    background: var(--primary);
+    color: white;
+    border-color: var(--primary);
+}
+
+.footer {
+    background-color: var(--dark);
+    color: white;
+    padding: 2rem 0;
+    margin-top: 4rem;
+}
+body.dark-theme .footer {
+    background-color: #0a0a16;
+}
+
+/* Filter button active state */
+#favFilterBtn.active {
+    background-color: #ffc107;
+    border-color: #ffc107;
+    color: #000;
+}
+#favFilterBtn.active i { color: #000; }
+
+/* Empty state */
+.empty-state { color: var(--muted); padding: 3rem 0; text-align: center; }
+.empty-state i { font-size: 3.5rem; }
+
+/* Modal overrides for dark */
+body.dark-theme .modal-content {
+    background-color: var(--card-bg);
+    color: var(--text-color);
+    border-color: var(--border-color);
+}
+body.dark-theme .modal-header,
+body.dark-theme .modal-footer {
+    border-color: var(--border-color);
+}
+body.dark-theme .btn-close {
+    filter: invert(1);
+}
+
+/* Dark mode form elements */
+body.dark-theme .form-control,
+body.dark-theme .form-select,
+body.dark-theme .input-group-text {
+    background-color: var(--input-bg) !important;
+    border-color: var(--border-color) !important;
+    color: var(--text-color) !important;
+}
+body.dark-theme .form-control:focus,
+body.dark-theme .form-select:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 0.2rem rgba(67,97,238,0.25);
+}
+body.dark-theme .btn-outline-primary {
+    color: var(--primary);
+    border-color: var(--primary);
+}
+body.dark-theme .btn-outline-primary:hover {
+    background-color: var(--primary);
+    color: #fff;
+}
+body.dark-theme .btn-outline-secondary {
+    color: var(--muted);
+    border-color: var(--border-color);
+}
+body.dark-theme .btn-outline-secondary:hover {
+    background-color: var(--border-color);
+    color: var(--text-color);
+}
+body.dark-theme .btn-outline-warning {
+    color: #ffc107;
+    border-color: #ffc107;
+}
+body.dark-theme .btn-outline-warning.active {
+    background-color: #ffc107;
+    color: #000;
+}
+body.dark-theme .bg-light {
+    background-color: var(--light) !important;
+}
+body.dark-theme .text-muted {
+    color: var(--muted) !important;
+}
